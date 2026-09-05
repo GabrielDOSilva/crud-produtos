@@ -1,14 +1,14 @@
 package br.com.dev.crudprodutos.dto;
 
-public class ProductResquestDTO {
+public class ProductRequestDTO {
 
 	private String name;
 	private Double price;
 	private Integer quantity;
 	
-	public ProductResquestDTO() {}
+	public ProductRequestDTO() {}
 
-	public ProductResquestDTO(String name, Double price, Integer quantity) {
+	public ProductRequestDTO(String name, Double price, Integer quantity) {
 		
 		this.name = name;
 		this.price = price;
