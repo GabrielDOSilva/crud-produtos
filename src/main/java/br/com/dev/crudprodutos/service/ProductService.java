@@ -2,7 +2,8 @@ package br.com.dev.crudprodutos.service;
 
 import org.springframework.stereotype.Service;
 
-import br.com.dev.crudprodutos.dto.ProductResquestDTO;
+import br.com.dev.crudprodutos.dto.ProductRequestDTO;
+import br.com.dev.crudprodutos.dto.ProductResponseDTO;
 import br.com.dev.crudprodutos.entity.Product;
 import br.com.dev.crudprodutos.repository.ProductRepository;
 
@@ -17,15 +18,24 @@ public class ProductService {
 		
 	}
 	
-	public Product create(ProductResquestDTO productresquestDTO) {
-		Product product = new Product();
-		
-		product.setName(productresquestDTO.getName());
-		product.setPrice(productresquestDTO.getPrice());
-		product.setQuantity(productresquestDTO.getQuantity());
-		
-		return productRepository.save(product);
-		
+	public ProductResponseDTO create(ProductRequestDTO productRequestDTO) {
+
+	    Product product = new Product();
+
+	    product.setName(productRequestDTO.getName());
+	    product.setPrice(productRequestDTO.getPrice());
+	    product.setQuantity(productRequestDTO.getQuantity());
+
+	    Product savedProduct = productRepository.save(product);
+
+	    ProductResponseDTO response = new ProductResponseDTO();
+
+	    response.setId(savedProduct.getId());
+	    response.setName(savedProduct.getName());
+	    response.setPrice(savedProduct.getPrice());
+	    response.setQuantity(savedProduct.getQuantity());
+
+	    return response;
 	}
 		
 	
