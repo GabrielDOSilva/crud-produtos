@@ -6,6 +6,15 @@ public class ProductResquestDTO {
 	private Double price;
 	private Integer quantity;
 	
+	public ProductResquestDTO() {}
+
+	public ProductResquestDTO(String name, Double price, Integer quantity) {
+		
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		
+	}
 	
 	public String getName() {
 		return name;
