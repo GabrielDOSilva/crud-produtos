@@ -1,4 +1,4 @@
-package br.com.dv.crudprodutos;
+package br.com.dev.crudprodutos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
