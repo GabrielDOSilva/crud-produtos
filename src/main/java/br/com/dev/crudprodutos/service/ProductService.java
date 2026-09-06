@@ -1,6 +1,7 @@
 package br.com.dev.crudprodutos.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,24 @@ public class ProductService {
 	                return response;
 	            })
 	            .toList();
+		
+	}
+	
+	public ProductResponseDTO findById(Long id) {
+		
+		Optional<Product> optionalProduct = productRepository.findById(id);
+		
+		Product product = optionalProduct
+				.orElseThrow(() -> new RuntimeException("Product not found!"));
+		
+		ProductResponseDTO response = new ProductResponseDTO();
+		
+		response.setId(product.getId());
+		response.setName(product.getName());
+		response.setPrice(product.getPrice());
+		response.setQuantity(product.getQuantity());
+		
+		return response;
 		
 	}
 		
