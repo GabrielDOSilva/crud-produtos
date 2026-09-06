@@ -1,5 +1,7 @@
 package br.com.dev.crudprodutos.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.dev.crudprodutos.dto.ProductRequestDTO;
@@ -36,6 +38,25 @@ public class ProductService {
 	    response.setQuantity(savedProduct.getQuantity());
 
 	    return response;
+	}
+	
+	public List<ProductResponseDTO> findAll(){
+		
+		List<Product> products = productRepository.findAll();
+		
+		return products.stream()
+	            .map(product -> {
+	                ProductResponseDTO response = new ProductResponseDTO();
+
+	                response.setId(product.getId());
+	                response.setName(product.getName());
+	                response.setPrice(product.getPrice());
+	                response.setQuantity(product.getQuantity());
+
+	                return response;
+	            })
+	            .toList();
+		
 	}
 		
 	

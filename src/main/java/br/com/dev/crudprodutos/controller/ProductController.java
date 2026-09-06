@@ -1,6 +1,9 @@
 package br.com.dev.crudprodutos.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,4 +31,13 @@ public class ProductController {
 
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping
+    public ResponseEntity<List<ProductResponseDTO>> findAll() {
+
+        List<ProductResponseDTO> products = productService.findAll();
+
+        return ResponseEntity.ok(products);
+    }
+    
 }
