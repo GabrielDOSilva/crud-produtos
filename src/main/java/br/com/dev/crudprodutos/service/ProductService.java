@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.dev.crudprodutos.dto.ProductRequestDTO;
 import br.com.dev.crudprodutos.dto.ProductResponseDTO;
 import br.com.dev.crudprodutos.entity.Product;
+import br.com.dev.crudprodutos.exception.ProductNotFoundException;
 import br.com.dev.crudprodutos.repository.ProductRepository;
 
 @Service
@@ -65,7 +66,7 @@ public class ProductService {
 		Optional<Product> optionalProduct = productRepository.findById(id);
 		
 		Product product = optionalProduct
-				.orElseThrow(() -> new RuntimeException("Product not found!"));
+				.orElseThrow(() -> new ProductNotFoundException("Product not found!"));
 		
 		ProductResponseDTO response = new ProductResponseDTO();
 		
@@ -81,7 +82,7 @@ public class ProductService {
 	public ProductResponseDTO update(Long id, ProductRequestDTO productRequestDTO) {
 		
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Product not found!"));
+				.orElseThrow(() -> new ProductNotFoundException("Product not found!"));
 		
 		product.setName(productRequestDTO.getName());
 		product.setPrice(productRequestDTO.getPrice());
@@ -102,7 +103,7 @@ public class ProductService {
 	public void delete(Long id) {
 		
 		Product product = productRepository.findById(id).orElseThrow(() -> new 
-				RuntimeException("Product not Found"));
+				ProductNotFoundException("Product not Found"));
 		
 		productRepository.delete(product);
 		
