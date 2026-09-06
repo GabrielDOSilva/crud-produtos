@@ -77,6 +77,26 @@ public class ProductService {
 		return response;
 		
 	}
+	
+	public ProductResponseDTO update(Long id, ProductRequestDTO productRequestDTO) {
 		
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Product not found!"));
+		
+		product.setName(productRequestDTO.getName());
+		product.setPrice(productRequestDTO.getPrice());
+		product.setQuantity(productRequestDTO.getQuantity());
+		
+		Product updateProduct = productRepository.save(product);
+		
+		ProductResponseDTO response = new ProductResponseDTO();
+		
+		response.setName(updateProduct.getName());
+		response.setPrice(updateProduct.getPrice());
+		response.setQuantity(updateProduct.getQuantity());
+		
+		return response;
+		
+	}
 	
 }
