@@ -99,4 +99,14 @@ public class ProductService {
 		
 	}
 	
+	public void delete(Long id) {
+		
+		Product product = productRepository.findById(id).orElseThrow(() -> new 
+				RuntimeException("Product not Found"));
+		
+		productRepository.delete(product);
+		
+		
+	}
+	
 }
