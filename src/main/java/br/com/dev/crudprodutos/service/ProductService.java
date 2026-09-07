@@ -32,14 +32,7 @@ public class ProductService {
 
 	    Product savedProduct = productRepository.save(product);
 
-	    ProductResponseDTO response = new ProductResponseDTO();
-
-	    response.setId(savedProduct.getId());
-	    response.setName(savedProduct.getName());
-	    response.setPrice(savedProduct.getPrice());
-	    response.setQuantity(savedProduct.getQuantity());
-
-	    return response;
+	    return toResponseDTO(savedProduct);
 	}
 	
 	public List<ProductResponseDTO> findAll(){
@@ -47,16 +40,7 @@ public class ProductService {
 		List<Product> products = productRepository.findAll();
 		
 		return products.stream()
-	            .map(product -> {
-	                ProductResponseDTO response = new ProductResponseDTO();
-
-	                response.setId(product.getId());
-	                response.setName(product.getName());
-	                response.setPrice(product.getPrice());
-	                response.setQuantity(product.getQuantity());
-
-	                return response;
-	            })
+	            .map(this::toResponseDTO)
 	            .toList();
 		
 	}
@@ -68,14 +52,7 @@ public class ProductService {
 		Product product = optionalProduct
 				.orElseThrow(() -> new ProductNotFoundException("Product not found!"));
 		
-		ProductResponseDTO response = new ProductResponseDTO();
-		
-		response.setId(product.getId());
-		response.setName(product.getName());
-		response.setPrice(product.getPrice());
-		response.setQuantity(product.getQuantity());
-		
-		return response;
+		return toResponseDTO(product);
 		
 	}
 	
@@ -90,13 +67,7 @@ public class ProductService {
 		
 		Product updateProduct = productRepository.save(product);
 		
-		ProductResponseDTO response = new ProductResponseDTO();
-		
-		response.setName(updateProduct.getName());
-		response.setPrice(updateProduct.getPrice());
-		response.setQuantity(updateProduct.getQuantity());
-		
-		return response;
+		return toResponseDTO(updateProduct);
 		
 	}
 	
@@ -108,6 +79,18 @@ public class ProductService {
 		productRepository.delete(product);
 		
 		
+	}
+	
+	private ProductResponseDTO toResponseDTO(Product product) {
+		
+		ProductResponseDTO response = new ProductResponseDTO();
+		
+		response.setId(product.getId());
+		response.setName(product.getName());
+		response.setPrice(product.getPrice());
+		response.setQuantity(product.getQuantity());
+		
+		return response;
 	}
 	
 }
