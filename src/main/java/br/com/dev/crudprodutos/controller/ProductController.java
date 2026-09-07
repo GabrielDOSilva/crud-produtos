@@ -2,6 +2,7 @@ package br.com.dev.crudprodutos.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,9 @@ public class ProductController {
 
         ProductResponseDTO response = productService.create(productRequestDTO);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity
+        		.status(HttpStatus.CREATED)
+        		.body(response);
     }
     
     @GetMapping
