@@ -1,23 +1,15 @@
 HELP.md
 target/
-target/
+
 .classpath
 .project
 .settings/
 .factorypath
 .springBeans
 .sts4-cache/
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -35,9 +27,6 @@ build/
 ### VS Code ###
 .vscode/
 
-<<<<<<< HEAD
-### VS Code ###
-.vscode/
-
-src/main/resources/application-local.properties
+### Local configuration ###
 src/main/resources/application.properties
+src/main/resources/application-local.properties
