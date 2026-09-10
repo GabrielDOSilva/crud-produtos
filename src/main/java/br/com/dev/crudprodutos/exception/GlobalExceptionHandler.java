@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import br.com.dev.crudprodutos.dto.ErrorResponseDTO;
 import br.com.dev.crudprodutos.dto.ValidationErrorDTO;
@@ -50,6 +51,19 @@ public class GlobalExceptionHandler {
 	    return ResponseEntity
 	            .status(HttpStatus.BAD_REQUEST)
 	            .body(response);
+	}
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<ErrorResponseDTO> handleHttpMessageNotReadable(
+	        HttpMessageNotReadableException exception) {
+
+	    ErrorResponseDTO error = new ErrorResponseDTO(
+	            HttpStatus.BAD_REQUEST.value(),
+	            "Invalid request body",
+	            LocalDateTime.now()
+	    );
+
+	    return ResponseEntity.badRequest().body(error);
 	}
 
 }
