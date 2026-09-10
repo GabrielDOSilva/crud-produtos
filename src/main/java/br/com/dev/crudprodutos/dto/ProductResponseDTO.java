@@ -1,10 +1,12 @@
 package br.com.dev.crudprodutos.dto;
 
+import java.math.BigDecimal;
+
 public class ProductResponseDTO {
 	
 	private Long id;
     private String name;
-    private Double price;
+    private BigDecimal price;
     private Integer quantity;
     
     
@@ -21,10 +23,10 @@ public class ProductResponseDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public Integer getQuantity() {

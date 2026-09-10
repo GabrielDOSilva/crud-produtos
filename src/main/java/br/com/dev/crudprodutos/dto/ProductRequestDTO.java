@@ -1,5 +1,7 @@
 package br.com.dev.crudprodutos.dto;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -12,7 +14,7 @@ public class ProductRequestDTO {
 	
 	@NotNull
 	@Positive
-	private Double price;
+	private BigDecimal price;
 	
 	@NotNull
 	@PositiveOrZero
@@ -20,7 +22,7 @@ public class ProductRequestDTO {
 	
 	public ProductRequestDTO() {}
 
-	public ProductRequestDTO(String name, Double price, Integer quantity) {
+	public ProductRequestDTO(String name, BigDecimal price, Integer quantity) {
 		
 		this.name = name;
 		this.price = price;
@@ -34,10 +36,10 @@ public class ProductRequestDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public Integer getQuantity() {
