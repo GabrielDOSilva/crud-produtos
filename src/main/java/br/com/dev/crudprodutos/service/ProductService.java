@@ -24,11 +24,7 @@ public class ProductService {
 	
 	public ProductResponseDTO create(ProductRequestDTO productRequestDTO) {
 
-	    Product product = new Product();
-
-	    product.setName(productRequestDTO.getName());
-	    product.setPrice(productRequestDTO.getPrice());
-	    product.setQuantity(productRequestDTO.getQuantity());
+		Product product = toEntity(productRequestDTO);
 
 	    Product savedProduct = productRepository.save(product);
 
@@ -61,13 +57,13 @@ public class ProductService {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new ProductNotFoundException("Product not found!"));
 		
-		product.setName(productRequestDTO.getName());
-		product.setPrice(productRequestDTO.getPrice());
-		product.setQuantity(productRequestDTO.getQuantity());
+		Product updatedProduct = toEntity(productRequestDTO);
+
+		updatedProduct.setId(product.getId());
 		
-		Product updateProduct = productRepository.save(product);
-		
-		return toResponseDTO(updateProduct);
+		Product savedProduct = productRepository.save(updatedProduct);
+
+		return toResponseDTO(savedProduct);
 		
 		
 	}
@@ -92,6 +88,17 @@ public class ProductService {
 		response.setQuantity(product.getQuantity());
 		
 		return response;
+	}
+	
+	private Product toEntity(ProductRequestDTO productRequestDTO) {
+
+	    Product product = new Product();
+
+	    product.setName(productRequestDTO.getName());
+	    product.setPrice(productRequestDTO.getPrice());
+	    product.setQuantity(productRequestDTO.getQuantity());
+
+	    return product;
 	}
 	
 }
