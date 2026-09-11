@@ -3,6 +3,8 @@ package br.com.dev.crudprodutos.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,12 +50,13 @@ public class ProductController {
         		.body(response);
     }
     
+    
     @GetMapping
-    public ResponseEntity<List<ProductResponseDTO>> findAll() {
+    public ResponseEntity<Page<ProductResponseDTO>> findAll(Pageable pageable) {
 
-        List<ProductResponseDTO> products = productService.findAll();
-
-        return ResponseEntity.ok(products);
+        Page<ProductResponseDTO> response = productService.findAll(pageable);
+        
+        return ResponseEntity.ok(response);
     }
     
     @GetMapping("/{id}")
